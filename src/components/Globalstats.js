@@ -1,37 +1,40 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCovidData } from '../redux/statisticsSlice';
-import '../App.css'
-import { showDetails } from '../redux/statisticsSlice';
 import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
+import { fetchCovidData } from '../redux/statisticsSlice';
 import CountryStats from './CountryStats';
+import '../App.css';
 
 const Globalstats = () => {
-  const { dataArray/*, isLoading */ } = useSelector((state) => state.Covid);
-    const dispatch = useDispatch();
+//  const [query, setQuery] = useState('');
+  // const Search = (event) => {
+  //   setQuery(event.target.value);
+  // };
+  const { dataArray, isLoading } = useSelector((state) => state.Covid);
 
-  
-    // if (dataArray.length === 0) {
-    //     setTimeout(() => {
-    //       dispatch(fetchCovidData());
-    //     }, '1000');
-    //   }
-    
-    useEffect(() => {
-      dispatch(fetchCovidData());
-      }, [dispatch, fetchCovidData]);
-    
-    
+  const filteredData = dataArray.filter((data) => (
+    data.country.toLowerCase()
+    /* .includes(query.toLowerCase()) */
+  ));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCovidData());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Spinner animation="border" />;
+  }
+
   return (
-    <div className='countryContainer'>
-        {dataArray.map((data) => (
-          <CountryStats key={data.id} details={data} />
-          
-        ))
-}
-        {/* <FaArrowRight className="fontIcon" /> */}
-    </div>
-  )}
+    <ul className="itemList">
+      {filteredData.map((data) => (
+        <CountryStats key={data.id} details={data} />
+      ))}
+      <FaArrowRight className="fontIcon" />
+    </ul>
+  );
+};
 export default Globalstats;

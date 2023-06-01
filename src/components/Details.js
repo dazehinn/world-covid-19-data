@@ -1,48 +1,52 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
-import { Container } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { showDetails } from '../redux/statisticsSlice';
+import '../App.css';
 
 const Details = () => {
-  const { dataArray, isLoading } = useSelector((state) => state.Covid);
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(showDetails(id));
-  }, []);
+  });
 
-  const filteredStats = dataArray.filter((country) => country.show === true);
+  const { dataArray } = useSelector((state) => state.Covid);
+
+  const filteredStats = dataArray.filter((data) => data.show);
 
   return (
-    <Container>
-      {console.log({filteredStats})};
-      <div className="detailsContainer">
-        {
-          filteredStats.map((country) => (
-            <>
-              <div key={uuidv4()} >
-                  <h2>
-                    New Cases:
-                    {' '}
-                    {country.cases.new}
-                  </h2>
-                  <h2>
-                    Total Cases:
-                    {' '}
-                    {country.country}
-                  </h2>
-                </div>
-            </>
-          ))
-        }
-      </div>
-    </Container>
-  )
-}
+    <div className="detailsContainer">
+      {
+        filteredStats.map((data) => (
+          <div key={uuidv4()} className="detailContainer">
+            <h1>
+              Country:
+              { ' ' }
+              { data.country }
+              ,
+              { ' ' }
+              { data.region }
+            </h1>
+            <h2>
+              New Cases:
+              {' '}
+              { data.cases.new }
+              ,
+            </h2>
+            <h2>
+              Total Cases:
+              {' '}
+              { data.cases.total }
+            </h2>
+          </div>
+        ))
+      }
+    </div>
+  );
+};
 
-export default Details
+export default Details;
