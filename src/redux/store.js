@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import CovidReducer from './statisticsSlice';
+import covidReducer, { fetchCovidData } from './statisticsSlice';
 
 const store = configureStore({
   reducer: {
-    Covid: CovidReducer,
+    Covid: covidReducer,
   },
 });
 
+store.dispatch(fetchCovidData());
 export default store;
