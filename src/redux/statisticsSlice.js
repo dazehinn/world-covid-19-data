@@ -15,14 +15,14 @@ export const fetchCovidData = createAsyncThunk('get/Covid19', async () => {
   });
   const response = await res.json();
 
-  const countryData = response.map((country) => ({
+  const covidData = response.map((country) => ({
     id: uuidv4(),
     country: country.country,
     region: country.region,
     cases: country.cases,
     show: false,
   }));
-  return countryData;
+  return covidData;
 });
 
 export const statisticsSlice = createSlice({
@@ -30,13 +30,8 @@ export const statisticsSlice = createSlice({
   initialState,
   reducers: {
     showDetails: (state, action) => {
-      console.log('show details');
-      state.dataArray.map((country) => {
-        if (country.country === action.payload) {
-          return { ...country, show: true };
-        }
-        return { ...country, show: false };
-      });
+      const detailedData = state.dataArray.find((data) => data.id === action.payload);
+      detailedData.show = true;
     },
   },
 
