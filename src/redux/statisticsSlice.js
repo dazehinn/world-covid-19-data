@@ -14,7 +14,15 @@ export const fetchCovidData = createAsyncThunk('get/Covid19', async () => {
     contentType: 'application/json',
   });
   const response = await res.json();
-  return response;
+
+  const countryData = response.map((country) => ({
+    id: uuidv4(),
+    country: country.country,
+    region: country.region,
+    cases: country.cases,
+    show: false,
+  }));
+  return countryData;
 });
 
 export const statisticsSlice = createSlice({
@@ -22,24 +30,22 @@ export const statisticsSlice = createSlice({
   initialState,
   reducers: {
     showDetails: (state, action) => {
-      console.log('hello reducer'); 
-      const newState = Object.entries(state)[0][1].map((item) => {
-        const show = JSON.parse(JSON.stringify(item));
-        if (show.id !== action.payload) return show;
-          return { ...show, detailsStatus: true };
-        });
-        return { ...state, showsItems: newState };
+      console.log('show details');
+      state.dataArray.map((country) => {
+        if (country.country === action.payload) {
+          return { ...country, show: true };
+        }
+        return { ...country, show: false };
+      });
     },
-    openModal: (state, action) => {
-        
-    }
   },
+
   extraReducers: (builder) => {
     builder.addCase(fetchCovidData.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchCovidData.fulfilled, (state, action) => {
-        state.dataArray = action.payload;
+      state.dataArray = action.payload;
       state.isLoading = false;
     });
     builder.addCase(fetchCovidData.rejected, (state) => {
