@@ -1,6 +1,6 @@
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import store from '../Redux/store';
+import store from '../redux/store';
 import GlobalStats from '../components/Globalstats';
 
 it('Test Globalstats renders correctly', () => {

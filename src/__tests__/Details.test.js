@@ -1,7 +1,7 @@
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import Details from '../components/Details';
-import store from '../Redux/store';
+import store from '../redux/store';
 
 it('Test Details component renders correctly', () => {
   const tree = renderer
