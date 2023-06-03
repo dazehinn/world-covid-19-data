@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import GlobalStats from '../components/Globalstats';
 
+describe('GloabalStats', () => {
 it('Test Globalstats renders correctly', () => {
   const tree = renderer
     .create(
@@ -12,4 +13,5 @@ it('Test Globalstats renders correctly', () => {
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
+});
 });
