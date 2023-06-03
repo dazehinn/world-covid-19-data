@@ -9,11 +9,11 @@ describe('fetchCovidData', () => {
     const expectedPayload = [
       {
         id: 1,
-        country: "Australia",
-        region: "Northern Territory",
+        country: 'Australia',
+        region: 'Northern Territory',
         cases: {
-         total: 624,
-          new: 52
+          total: 624,
+          new: 52,
         },
         show: false,
       },
