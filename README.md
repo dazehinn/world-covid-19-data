@@ -82,7 +82,7 @@
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 - You can see how it looks like [here](https://global-covid-statistics.onrender.com/)
-- Presentation of the project is [here](https://www.loom.com/share/a25ce530e2084af98bb51998c4111f76)
+- Presentation of the project is [here](https://www.loom.com/share/7ba176dc870d421d857a36073e8d0fb4)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
