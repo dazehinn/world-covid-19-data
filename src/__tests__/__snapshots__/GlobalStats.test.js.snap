@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GloabalStats Test Globalstats renders correctly 1`] = `
+<div
+  className="loading"
+>
+  <div
+    className="spinner-border"
+  />
+</div>
+`;

@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 const initialState = {
   dataArray: [],
   isLoading: false,
+  error: '',
 };
 
 export const fetchCovidData = createAsyncThunk('get/Covid19', async () => {
-  const url = 'https://api.api-ninjas.com/v1/covid19?date=2022-01-01';
+  const url = 'https://api.api-ninjas.com/v1/covid19?date=2023-01-03';
   const res = await fetch(url, {
     method: 'GET',
     headers: { 'X-Api-Key': 'rqBsI0z9wOGAqafKnCkkEA==KMMCPBuS2rX5v54e' },
@@ -43,10 +44,10 @@ export const statisticsSlice = createSlice({
       state.dataArray = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(fetchCovidData.rejected, (state) => {
+    builder.addCase(fetchCovidData.rejected, (state, action) => {
       state.isLoading = false;
       // state.dataArray = [];
-      // state.error = action.error.message;
+      state.error = action.error.message;
     });
   },
 
