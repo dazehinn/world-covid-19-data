@@ -38,7 +38,7 @@
 
 
 
-**Global Covid Statistics**  is a web application the gives the total number of Covid-19 cases per country. It is created using the coinstats API. Countries and/or regions are displayed on the homepage. The figures are displayed when a country is clicked on the homepage.
+**Global Covid Statistics**  is a web application that gives the total number of Covid-19 cases per country from an API. Countries and/or regions are displayed on the homepage. Detailed figures are displayed when a country is clicked on the homepage.
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
